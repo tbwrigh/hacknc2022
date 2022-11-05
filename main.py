@@ -51,16 +51,18 @@ def login(username: str = Form(), password: str = Form()):
 
     if (len(res) != 0):
         if res[0][0] == password:
-            print("correct password")
+            print("Correct Password")
         else:
-            print("incorrect password")
+            print("Your Password is Incorrect")
     else:
         print("Your Username is Invalid")
-        # user not found
+        # user not found or doesnt meet requirments
     
 @app.post("/new_user/") #check if username or email is in system before adding to user
 def new_user(firstname: str= Form(), lastname: str= Form(), username: str = Form(), email: str = Form(), password: str = Form()):
-    #adds to a table
+    #adds to a table    return {"username": username}
+    
+
     cur.execute(f"""
         INSERT INTO users VALUES ({username}, {email}, {password}, {firstname}, {lastname})
     """)
