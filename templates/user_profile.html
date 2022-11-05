@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ user.name }}'s home</title>
+</head>
+<body>
+<div class="title-bar">
+    <h1>{{ user.name}}</h1>
+    <img src="/static/images/{{ user.profile_image | default('profile.jpg') }}" alt="{{user}}">
+</div>
+</body>
+</html>
