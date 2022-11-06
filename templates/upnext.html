@@ -12,17 +12,20 @@
 <body>
     <video width="100%" controls>
         <!-- make it play right video -->
-        <source src="/static/working_videos/{{ filepath }}" type="video/mp4" />
+        <source src="/static/working_videos/{{ post_id }}.mp4" type="video/mp4" />
     </video>
 
     <!-- connect to right form -->
-    <form action="/start-post" id="start-post-form" method="post" enctype="multipart/form-data"> 
+    <form action="/continue-post" id="start-post-form" method="post" enctype="multipart/form-data"> 
         <input type="file" name="file" id="video-input" capture="environment" accept="video/*">
         <input type="text" name="auth" id="auth" style="display:none;">
+        <input type="text" name="post_id" id="post_id" style="display:none;">
         <button type="submit" style="display: none;"></button>
     </form>
 
     <script>
+        document.getElementById("auth").value = "{{ auth }}"
+        document.getElementById("post_id").value = "{{ post_id }}"
         document.getElementById("video-input").addEventListener("change", () => {document.getElementById("start-post-form").submit()}, false)
     </script>
 </body>

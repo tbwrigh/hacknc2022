@@ -12,30 +12,103 @@
     align-items: center;
     flex-direction: column;
 }
+/* input[type=text], input[type=password] {
 
-body {  
+  } */
+
+
+
+  body {  
     font-family: 'Libre Caslon Display';font-size: 22px;
     background-color: var(--teal); 
     height: 90vh;
     width: 100vw;
   }  
-/* mini logo*/
 
 /*whitebox */
 .whitebox{
-  background-color: white;
-  text-align: center !important;
-  font-size: 4rem;
-  top: 5px;
-  width: 100vw;
-  margin: 0% !important;
-  padding: 100px;
+    background-color: white;
+    text-align: center !important;
+    font-size: 3rem;
+    top: 5px;
+    width: 100vw;
+    margin: 00% !important;
+    padding: 40px;
+  }
+  
+/* mini logo*/
+.just-logo {
+    padding: 5px;
+    width: 100px;
+    position: absolute;
+    top: 65px;
+    left: 10px;
 }
 
-.just-logo {
+/*firstname */
+#username{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    width: 80%;
+    font-size: 1.5rem;
+    margin: 20px 60px; 
+    border: 30px; 
+}
+
+/* password */
+#password{
+   width: 80%; 
+   font-size: 1.5rem;
+   margin: 20px 60px; 
+   border: 30px; 
+} 
+
+/* profile icon */
+.person-icon {
   padding: 5px;
-  width: 200px;
+  width: 50px;
   position: absolute;
-  top: 45px;
-  left: 70px;
+  left: 0%;
+  top: 35%;
+} 
+
+/* password icon top */
+.lock-icon {
+  border: none !important;
+  width: 40px;
+  position: absolute;
+  left: 0%;
+  top: 50%;
+}
+/* create_account_button*/
+
+/* sign up button */
+a {
+    background-color: var(--orange);
+    text-decoration: none;
+    color: black;
+    font-size: 2rem;
+    width: 70%;
+    text-align: center;
   }
+
+  .center-txt {
+    text-align: center;
+  }
+
+/* log in button */    
+button {   
+  background-color: #b8b8b8ff;   
+  width: 70%;  
+   color: #a162a0ff;   
+   padding: 5px;   
+   margin: 20px 70px; 
+   border: 30px;   
+   cursor: pointer;
+   font-size: 2rem;  
+    }  
+
+    .header-text {
+      font-size: 2rem !important;
+      margin-top: 10% !important;
+    }

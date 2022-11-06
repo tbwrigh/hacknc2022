@@ -15,6 +15,8 @@ from pathlib import Path
 
 from hashlib import sha256
 
+import os
+
 import ffmpeg
 
 templates = Jinja2Templates(directory="templates")
@@ -161,18 +163,82 @@ async def NewPost(post_id: int = Form(), auth: str = Form(), caption: str = Form
     return RedirectResponse(f'/userhome?auth={auth}', status_code=302)
 
 
-@app.post("/continue_post")
-async def ContinuePost(file: bytes = File(), fileb: UploadFile = File(), post_id: int = Form(), authstring: str = Form(), next_user: str = Form()):
-    
+@app.post("/continue-post")
+async def ContinuePost(file: UploadFile = File(), post_id: int = Form(), auth: str = Form()):
+    filename = str(uuid.uuid4())
 
-    return RedirectResponse(f'/userhome?auth={authstring}', status_code=302)
+    res = cur.execute(f"SELECT video_paths FROM posts WHERE video_paths='{filename}'")
+    res = res.fetchall()
+
+    if (len(res) != 0):
+        print("Error filename already in database")
+
+    extension = str(file.filename).split(".")[-1]
+
+    if extension != "mp4":
+        print("wrong file type")
+
+    vpath = f'./static/stored_videos/{filename}.{extension}'
+
+    with open(vpath, 'wb') as video:
+        content = await file.read()
+        video.write(content)
+        video.close()
+
+    os.rename(f"./static/working_videos/{post_id}.mp4", f"./static/working_videos/{post_id}_old.mp4")
+
+    old_file = ffmpeg.input(f"./static/working_videos/{post_id}_old.mp4")
+    new_file = ffmpeg.input(vpath)
+
+    ffmpeg.concat(old_file, new_file).output(f"./static/working_videos/{post_id}.mp4").run()
+
+    res = cur.execute(f"SELECT video_paths FROM posts WHERE id={post_id}")
+    new_video_paths = res.fetchall()[0][0] + "|" + f"{filename}.{extension}"
+
+    cur.execute(f"UPDATE posts SET video_paths=? WHERE id=?", (new_video_paths, post_id))
+    con.commit()
+
+    return RedirectResponse(f'/continue?auth={auth}&id={post_id}', status_code=302)
+
+@app.post("/add-to-post")
+def add_to_post(auth: str = Form(), post_id: str = Form(), next_user: str = Form()):
+    res = cur.execute(f"SELECT users_remaining, usernames FROM posts WHERE id={post_id}")
+    res = res.fetchall()
+    new_chain_length = res[0][0] - 1
+    new_usernames = res[0][1] + "|" + auth.split("|")[0]
+
+    cur.execute(f"""
+    UPDATE posts
+    SET usernames=?,
+        next_user=?,
+        users_remaining=?
+    WHERE id=?
+    """, (new_usernames, next_user, new_chain_length, post_id))
+    con.commit()
+
+    return RedirectResponse(f"/userhome?auth={auth}", status_code=302)
+
+@app.get("/continue")
+def continue_continue(request: Request, auth: str, id: str):
+    return templates.TemplateResponse("continue.html", {"request": request, "auth": auth, "post_id": id})
 
 @app.get("/userhome")
 async def user_home_page(request: Request, auth: str):
     if auth not in login_hashes:
         return RedirectResponse("/static/login.html", status_code=302)
 
-    return templates.TemplateResponse("user_home.html", {"request": request, "name": auth.split("|")[0], "auth": auth.replace("|", "%7C")})
+    res = cur.execute("SELECT id, usernames, caption FROM posts")
+    res = res.fetchall()
+
+    res = list(res)
+
+    for i in range(len(res)):
+        res[i] = list(res[i])
+        res[i][1] = res[i][1].split("|")
+
+    print(res)
+
+    return templates.TemplateResponse("user_home.html", {"request": request, "name": auth.split("|")[0], "auth": auth.replace("|", "%7C"), "res": res})
 
 @app.post("/start-post")
 async def start_post(file: UploadFile = File(), auth: str = Form()):
@@ -227,3 +293,8 @@ async def inbox(request: Request, auth: str):
         res[i].append(res[i][1].split("|")[-1])
 
     return templates.TemplateResponse("inbox.html", {"request": request, "auth": auth, "res": res})
+
+@app.get("/upnext")
+def upnext(request: Request, auth: str, id: str):
+
+    return templates.TemplateResponse("upnext.html", {"request": request, "auth": auth, "post_id": id})

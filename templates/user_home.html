@@ -17,6 +17,21 @@
         <button type="submit" style="display: none;"></button>
     </form>
 
+
+    {% for result in res %}
+        <video width="100%" controls>
+            <!-- make it play right video -->
+            <source src="/static/working_videos/{{ result[0] }}.mp4" type="video/mp4" />
+        </video>
+        <p>{{ result[2] }}</p>
+        <p>
+            by: 
+            {% for username in result[1] %}
+             <span>{{ username }}, </span>
+            {% endfor %}
+        </p>
+    {% endfor %}
+
     <script>
         document.getElementById("video-input").addEventListener("change", () => {document.getElementById("start-post-form").submit()}, false)
     </script>
