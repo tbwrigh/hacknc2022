@@ -11,7 +11,21 @@
 </head>
 <body>
     <video width="100%" controls>
-        <source src="/static/stored_videos/{{ filepath }}" type="video/mp4" />
+        <source src="/static/working_videos/{{ post_id }}.mp4" type="video/mp4" />
     </video>
+    <form action="/new_post" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="post_id" id="post_id" style="display: none;">
+        <input type="text" name="auth" id="auth" style="display: none;">
+        <input type="text" name="caption" id="caption">
+        <input type="text" name="next_user" id="next_user">
+        <input type="number" name="chain_length" id="chain_length">
+        <input type="number" name="max_time" id="max_time">
+        <button type="submit">Post</button>
+    </form>
+
+    <script>
+        document.getElementById("post_id").value = "{{ post_id }}"
+        document.getElementById("auth").value = "{{ auth }}"
+    </script>
 </body>
 </html>

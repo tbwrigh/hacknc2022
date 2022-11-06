@@ -1,3 +1,5 @@
 venv
 __pycache__
 user.sqlite
+static/stored_videos/*
+static/working_videos/*

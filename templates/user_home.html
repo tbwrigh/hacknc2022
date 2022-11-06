@@ -6,6 +6,9 @@
 </head>
 <body onload="document.getElementById('auth').value = '{{ auth }}'">
     <h1>{{ name }}'s home</h1>
+
+    <a href="/inbox?auth={{ auth }}">Inbox</a>
+
     <a href="/logout?auth={{ auth }}" onclick="document.cookie = 'auth = ; expires = Thu, 01 Jan 1970 00:00:00 GMT'">Logout</a>
 
     <form action="/start-post" id="start-post-form" method="post" enctype="multipart/form-data"> 

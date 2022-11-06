@@ -15,7 +15,11 @@ from pathlib import Path
 
 from hashlib import sha256
 
+import ffmpeg
+
 templates = Jinja2Templates(directory="templates")
+
+templates.env.filters["zip"] = zip
 
 app = FastAPI()
 
@@ -47,7 +51,7 @@ async def startup():
         usernames TEXT,
         timestamp TEXT,
         next_user TEXT,
-        users_remaining TEXT,
+        users_remaining INT,
         time_limit INT,
         likes INT DEFAULT 0,
         comments TEXT DEFAULT ''
@@ -140,61 +144,26 @@ async def logout(auth: str):
     return RedirectResponse("/static/login.html", status_code=302)
 
 @app.post("/new_post")
-async def NewPost(post_id: int = Form(), authstring: str = Form(), caption: str = Form(), next_user: str = Form(), chain_length: str = Form(), max_time: int = Form()):
-    #take in parameters for files, authstring, and caption
-    
-    username = authstring.split("|")
+async def NewPost(post_id: int = Form(), auth: str = Form(), caption: str = Form(), next_user: str = Form(), chain_length: int = Form(), max_time: int = Form()):
+    username = auth.split("|")[0]
 
-    cur.execute(f"INSERT INTO posts VALUES ({new_id}, {caption}, {vpath}, {username}, {time.time()}, {next_user}, {chain_length-1}, {max_time})'")
+    cur.execute(f"""
+    UPDATE posts
+    SET caption = ?,
+        usernames = ?,
+        next_user = ?,
+        users_remaining = ?,
+        time_limit = ?
+    WHERE id = ?
+    """, (caption, username, next_user, chain_length-1, max_time, post_id))
     con.commit()
 
-    return RedirectResponse(f'/userhome?auth={authstring}', status_code=302)
+    return RedirectResponse(f'/userhome?auth={auth}', status_code=302)
 
 
 @app.post("/continue_post")
 async def ContinuePost(file: bytes = File(), fileb: UploadFile = File(), post_id: int = Form(), authstring: str = Form(), next_user: str = Form()):
-    res = cur.execute(f"SELECT (video_paths, usernames, next_user, users_remaining) FROM posts WHERE id='{post_id}'")
-    res = res.fetchall()
-
-    (db_video_paths, db_usernames, db_next_user, db_users_remaining) = res
-
-    if db_next_user != authstring.split("|")[0]:
-        print("Error wrong user") 
     
-    filename = str(uuid.uuid4())
-
-    res = cur.execute(f"SELECT video_upload_path FROM posts WHERE video_upload_path='{filename}'")
-    res = res.fetchall()
-
-    if (len(res) != 0):
-        print("Error filename already in database")
-
-    extension = str(fileb.filename).split(".")[-1]
-
-    if extension != "mp4":
-        print("wrong file type")
-
-    vpath = f'./stored_videos/{filename}.{extension}'
-
-    with open(vpath, 'wb') as video:
-        video.write(file)
-        video.close()
-    
-    video_paths = db_video_paths + "|" + vpath
-    usernames = db_usernames + "|" + authstring.split("|")[0]
-    users_remaining = db_users_remaining - 1
-    
-    cur.execute(f"""
-        UPDATE posts
-        SET video_paths = '{video_paths}',
-            usernames = '{usernames}',
-            next_user = '{next_user}',
-            users_remaining = {users_remaining},
-            timestamp = '{str(time.time())}'
-        WHERE
-            id = {post_id};
-    """)
-    con.commit()
 
     return RedirectResponse(f'/userhome?auth={authstring}', status_code=302)
 
@@ -234,12 +203,27 @@ async def start_post(file: UploadFile = File(), auth: str = Form()):
         video.write(content)
         video.close()
 
+    ffmpeg.input(vpath).output(f"./static/working_videos/{new_id}.mp4").run()
+
     cur.execute(f"INSERT INTO posts(id, video_paths, timestamp) VALUES (?,?,?)", (new_id, f"{filename}.{extension}", time.time()))
     con.commit()
 
-    return RedirectResponse(f'/make-post?auth={auth}&filepath={filename}.{extension}', status_code=302)
+    return RedirectResponse(f'/make-post?auth={auth}&id={new_id}&filepath={filename}.{extension}', status_code=302)
 
 @app.get("/make-post")
-async def make_post(request: Request, auth: str, filepath: str):
-    return templates.TemplateResponse("post.html", {"request": request, "auth": auth, "filepath": filepath})
+async def make_post(request: Request, auth: str, id: int, filepath: str):
+    return templates.TemplateResponse("post.html", {"request": request, "auth": auth, "post_id": id})
 
+@app.get("/inbox")
+async def inbox(request: Request, auth: str):
+    name = auth.split('|')[0]
+
+    res = cur.execute(f"SELECT id, usernames FROM posts WHERE next_user='{name}'")
+    res = res.fetchall()
+
+    for i in range(len(res)):
+        res[i] = list(res[i])
+        res[i].append(res[i][1].split("|")[0])
+        res[i].append(res[i][1].split("|")[-1])
+
+    return templates.TemplateResponse("inbox.html", {"request": request, "auth": auth, "res": res})

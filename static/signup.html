@@ -8,28 +8,34 @@
     </head>
     <body onload="document.getElementById('timestamp').value = Date.now()">
         <form class="flex-form" action="/new_user" method="post" id="login-form" enctype="application/x-www-form-urlencoded">
-            <label for="firstname">First Name: </label>
-            <input type="text" name="firstname" id="firstname">
+            <div class="whitebox">
+                <span>
+                    <img src="./images/just_logo.png" class="just-logo"></img><div class="title"></h6>The Story Goes...</h6></div>
+                </span>
+            </div>
+            <img src="./images/default.png" class="person-icon">
+            <img src="./images/lock.png" class="lock-icon">
+            <img src="./images/lock.png" class="lock-icon1">
+            <img src="./images/email.png" class="letter-icon">
+            <img src="./images/nametag.webp" class="badge-icon">
+            <img src="./images/nametag.webp" class="badge-icon1">
+            <h1 class="header-text">Create a Profile and Share Your Story</h1>
+            <input type="text" name="firstname" id="firstname" placeholder="First Name">
             <br>
-            <label for="lastname">Last Name: </label>
-            <input type="text" name="lastname" id="lastname">
+            <input type="text" name="lastname" id="lastname" placeholder="Last Name">
             <br>
-            <label for="username">Username: </label>
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username" placeholder="Username">
             <br>
-            <label for="email">Email: </label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="email" id="email" placeholder="Email">
             <br>
-            <label for="password">Password: </label>
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password" placeholder="Password">
             <br>
-            <label for="password">Confirm Password: </label>
-            <input type="password" name="cpassword" id="cpassword">
+            <input type="password" name="cpassword" id="cpassword" placeholder="Verify Your Password">
             <br>
             <input type="text" name="timestamp" id="timestamp" style="display: none;">
-            <button type="submit">Join</button>
+            <button type="submit"></h2>Join</h2></button>
             <br>
-            <a href="/static/login.html">Login Here!</a>
+            <a href="/static/login.html" class="center-txt">Login Here!</a>
         </form>
         <script>
 

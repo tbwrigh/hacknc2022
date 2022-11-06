@@ -78,7 +78,8 @@ width: 400px;
       padding: 12px 10px;   
       display: inline-block;   
       border: 2px solid #ef7241ff;   
-      box-sizing: border-box;   
+      box-sizing: border-box; 
+      font-size: 1.5rem;   
   }  
 
 /* log in button */    
@@ -116,5 +117,5 @@ button {
 .title {
 display: inline-flex;
 height: 100%;
-font-size: 4rem;
+font-size: 1rem;
 }
