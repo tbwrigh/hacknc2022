@@ -1,0 +1,44 @@
+:root {
+    /* CSS HEX */
+    --gray: #b8b8b8ff;
+    --orange: #ef7241ff;
+    --teal: #48b8c6ff;
+    --purple: #a162a0ff;
+    --blue: #5e91ccff;
+  }
+
+.flex-form{
+    display: flex; /*or inline-flex*/
+    align-items: center;
+    flex-direction: column;
+}
+input[type=text], input[type=password] {
+
+  }
+
+  li {
+    width: 100px;
+    height: 100px;
+    background-color: #8cacea;
+    margin: 8px;
+  }
+/* mini logo*/
+/*whitebox */
+/*firstname */
+
+
+/*lastname */
+
+
+/*username */
+
+
+/*email */
+
+
+/* password*/
+
+
+/*verfiy_password */
+
+/* create_account_button*/

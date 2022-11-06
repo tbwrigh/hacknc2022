@@ -1,0 +1,125 @@
+:root {
+    /* CSS HEX */
+    --gray: #b8b8b8ff;
+    --orange: #ef7241ff;
+    --teal: #48b8c6ff;
+    --purple: #a162a0ff;
+    --blue: #5e91ccff;
+  }
+    
+  /* background */
+  body {  
+    font-family: 'Libre Caslon Display';font-size: 11px;
+    background-color: var(--teal); 
+    /*flex: 1 0 0;
+    min-height: 100 px;
+    flex-shrink: 0;
+    align-self: flex-end;
+    order: 3;*/
+    height: 90vh;
+    width: 90vw;
+  
+  }  
+  
+  img {
+    border: none !important;
+  }
+  
+  /*mini logo */
+  .just-logo {
+  padding: 5px;
+  width: 90px;
+  position: absolute;
+  top: 50px;
+  left:-2px;
+  }
+  
+  /*user pic */
+  .person-icon {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+    top: 252px;
+  }   
+  
+  /* user pic 1 */
+  .person-icon {
+    border: none !important;
+    width: 50px;
+    position: absolute;
+    left: 60px;
+    top: 38%;
+  }
+  
+  /* lock pic */
+  .lock-icon {
+    border: none !important;
+    width: 40px;
+    position: absolute;
+    left: 68px;
+    top: 52%;
+  }
+  
+  /* box */
+  .whitebox {
+  background-color: white;
+  text-align: center !important;
+  top: 5px;
+  width: 400px;
+  }
+  
+  /*Username and Pass */
+    form {   
+        height: 100vh;  
+        width: 50vw;
+    }  
+  
+    input[type=text], input[type=password] {   
+        width: 85%;   
+        margin: 10px 115px;
+        margin-top: 30%;
+        margin-bottom: -30%;  
+        padding: 12px 10px;   
+        display: inline-block;   
+        border: 2px solid #ef7241ff;   
+        box-sizing: border-box;   
+    }  
+  
+  /* log in button */    
+  button {   
+    background-color: #b8b8b8ff;   
+    width: 85%;  
+     color: #a162a0ff;   
+     padding: 15px;   
+     margin: 40px 100px; 
+     border: 30px;   
+     cursor: pointer;
+     font-size: 1.5rem;   
+      }  
+  
+  /* sign up button */  
+      a {
+        background-color: var(--orange);
+        text-decoration: none;
+        position: absolute;
+        top: 500px;
+        right: 30px;
+        color: var(--gray);
+        height: 5vh;
+        width: 85vw;
+        display: inline-flex;
+        font-size: 1.5rem;
+        padding-left:30px;
+        color: black
+      }
+  
+  
+  
+  
+  
+  .title {
+  display: inline-flex;
+  height: 100%;
+  font-size: 4rem;
+  }

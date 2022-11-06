@@ -1,10 +1,88 @@
 :root {
     /* CSS HEX */
-    --gray-x-11-gray: #b8b8b8ff;
-    --mandarin: #ef7241ff;
-    --maximum-blue-green: #48b8c6ff;
-    --pearly-purple: #a162a0ff;
-    --united-nations-blue: #5e91ccff;
+    --gray: #b8b8b8ff;
+    --orange: #ef7241ff;
+    --teal: #48b8c6ff;
+    --purple: #a162a0ff;
+    --blue: #5e91ccff;
 }
+    
 
-body {}
+Body {  
+    font-family: 'Libre Caslon Display';font-size: 22px;
+    background-color: #ffffff; 
+    height: 100vh;
+    width: 100vw;
+  }  
+
+  button {   
+    background-color: #b8b8b8ff;   
+    width: 85%;  
+     color: #a162a0ff;   
+     padding: 15px;   
+     margin: 30px 45px;   
+     border: 30px;   
+     cursor: pointer;   
+      }  
+
+    a {
+    background-color: #b8b8b8ff;   
+    width: 100%;  
+     color: #a162a0ff;   
+     padding: 15px;   
+     margin: 100px 0px;   
+     border: none;   
+     cursor: pointer;
+     /* margin-top: 50px;      */
+    }
+
+form {   
+        border: 3px solid #a162a0ff; 
+        height: 100vh;  
+        width: 50vw;
+    }  
+
+    input[type=text], input[type=password] {   
+        width: 85%;   
+        margin: 10px 45px;
+        margin-bottom: 70px;  
+        padding: 12px 10px;   
+        display: inline-block;   
+        border: 2px solid #ef7241ff;   
+        box-sizing: border-box;   
+    }  
+
+    button:hover {   
+        opacity: 0.7;   
+    }   
+  .cancelbtn {   
+        width: auto;   
+        padding: 10px 18px;  
+        margin: 10px 5px;  
+    }   
+
+    .container {
+           
+        padding: 25px;   
+        background-color: lightblue;  
+        height: 45vh;
+        width: 50vw;
+
+    }   
+
+    .down { 
+        Position: absolute; 
+        Bottom: 0; 
+        padding-bottom: 250px;
+        padding-left: 25px;
+        background-color: lightblue;  
+        height: 55vh;
+        width: 50vw;
+    } 
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 50px 5px;
+    }
+
+    
