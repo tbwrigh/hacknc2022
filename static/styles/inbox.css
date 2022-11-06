@@ -1,0 +1,59 @@
+:root {
+/* CSS HEX */
+  --gray: #b8b8b8ff;
+  --orange: #ef7241ff;
+  --teal: #48b8c6ff;
+  --purple: #a162a0ff;
+  --blue: #5e91ccff;
+  --white: #ffffff;
+}
+
+body {
+  width: 100vw;
+  text-align: center;
+}
+
+.arrow-icon {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  height: 4rem;
+  margin-top: 2%;
+  margin-left: 1%;
+
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+.content-container {
+  vertical-align: middle;
+}
+
+.whitebox {
+  background-color: var(--teal);
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+li {
+  background-color: var(--purple);
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  margin-top: 2%;
+  width: 60vw;
+  font-size: 2rem;
+}
+
+li h4 {
+  font-size: 2.5rem;
+}
+
+li a {
+  text-decoration: none;
+  color: black !important;
+}

@@ -1,0 +1,68 @@
+:root {
+/* CSS HEX */
+    --gray: #b8b8b8ff;
+    --orange: #ef7241ff;
+    --teal: #48b8c6ff;
+    --purple: #a162a0ff;
+    --blue: #5e91ccff;
+    --white: #ffffff;
+}
+
+body {
+    background-color: var(--teal);
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white);
+}
+
+li {
+    display: inline;
+    margin-left: 1%;
+    margin-right: 1%;
+    color: var(--gray) !important;
+    height: 100%;
+}
+
+.right {
+    float: right;
+}
+
+.title {
+    font-size: 2rem;
+    vertical-align: middle;
+}
+
+li a {
+    font-size: 1.75rem;
+    text-decoration: none;
+    color: var(--gray) !important;
+}
+
+.middle {
+    margin-top: 40% !important;
+}
+
+img {
+    height: 6rem;
+    margin-right: 1%;
+}
+
+.loading {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--purple)  !important;
+    color: var(--gray);
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .loading h1 {
+    vertical-align: middle;
+  }
