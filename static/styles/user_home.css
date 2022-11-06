@@ -10,13 +10,16 @@
 
 body {
     background-color: var(--teal);
+    width: 100vw !important;
 }
 
 ul {
     list-style-type: none;
     margin: 0;
+    margin-bottom: 3%;
     padding: 0;
     background-color: var(--white);
+    width: 100vw !important;
 }
 
 li {
@@ -64,7 +67,7 @@ img {
 }
 
 .player {
-    margin-left: 10%;
+    margin-left: 6%;
     margin-top: 5%;
 }
 
@@ -79,6 +82,7 @@ img {
 }
 
 form {
+    margin: 0 !important;
     width: 80vw !important;
     padding: 1%;
 }
