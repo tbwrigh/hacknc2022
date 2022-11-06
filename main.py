@@ -190,7 +190,7 @@ async def ContinuePost(file: UploadFile = File(), post_id: int = Form(), auth: s
     old_file = ffmpeg.input(f"./static/working_videos/{post_id}_old.mp4")
     new_file = ffmpeg.input(vpath)
 
-    ffmpeg.concat(old_file, new_file).output(f"./static/working_videos/{post_id}.mp4").run()
+    ffmpeg.concat(old_file, new_file).filter('fps', fps=24, round='up').output(f"./static/working_videos/{post_id}.mp4").run()
 
     res = cur.execute(f"SELECT video_paths FROM posts WHERE id={post_id}")
     new_video_paths = res.fetchall()[0][0] + "|" + f"{filename}.{extension}"
