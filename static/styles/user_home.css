@@ -24,7 +24,7 @@ li {
     margin-left: 1%;
     margin-right: 1%;
     color: var(--gray) !important;
-    height: 100%;
+    height: 40vh;
 }
 
 .right {
@@ -51,18 +51,34 @@ img {
     margin-right: 1%;
 }
 
-.loading {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--purple)  !important;
-    color: var(--gray);
-    text-align: center;
-    vertical-align: middle;
-  }
 
-  .loading h1 {
-    vertical-align: middle;
-  }
+.content-container {
+    margin-top: 5%;
+
+    height: 40vh;
+    width: 80vw;
+
+    background-color: var(--purple) !important;
+
+    text-align: center;
+}
+
+.player {
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+#start-post-form {
+    margin-top: 5%;
+    margin-left: 25%;
+}
+
+.tooright {
+    margin-right: 15%;
+    margin-bottom: 2%;
+}
+
+form {
+    width: 80vw !important;
+    padding: 1%;
+}

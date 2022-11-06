@@ -245,7 +245,7 @@ async def start_post(file: UploadFile = File(), auth: str = Form()):
     res = cur.execute(f"SELECT id FROM posts")
     res = res.fetchall()
     if len(res) != 0:
-        new_id = res[-1][0]
+        new_id = res[-1][0] + 1
     else:
         new_id = 0
 

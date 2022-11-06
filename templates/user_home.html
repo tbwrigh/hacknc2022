@@ -11,36 +11,43 @@
         <li class="right"><a href="/logout?auth={{ auth }}" onclick="document.cookie = 'auth = ; expires = Thu, 01 Jan 1970 00:00:00 GMT'"  class="middle">Logout</a></li>
         <li class="right"><a href="/inbox?auth={{ auth }}" class="middle">Inbox</a></li>
     </ul>
-
-    <div class="loading" id="loading" style="display: none;">
-        <h1>Loading Please Wait</h1>
-    </div>
     
-    <form action="/start-post" id="start-post-form" method="post" enctype="multipart/form-data"> 
-        <input type="file" name="file" id="video-input" capture="environment" accept="video/*">
-        <input type="text" name="auth" id="auth" style="display:none;">
-        <button type="submit" style="display: none;"></button>
-    </form>
+    <center>
+        <form action="/start-post" id="start-post-form" method="post" enctype="multipart/form-data"> 
+            <label for="file" class="tooright">New Post:</label><br>
+            <input type="file" name="file" id="video-input" capture="environment" accept="video/*">
+            <input type="text" name="auth" id="auth" style="display:none;">
+            <button type="submit" style="display: none;"></button>
+        </form>
+    </center>
+   
 
-
+   
     {% for result in res %}
-        <video width="100%" controls>
-            <!-- make it play right video -->
-            <source src="/static/working_videos/{{ result[0] }}.mp4" type="video/mp4" />
-        </video>
-        <p>{{ result[2] }}</p>
-        <p>
-            by: 
-            {% for username in result[1] %}
-             <span>{{ username }}, </span>
-            {% endfor %}
-        </p>
+        <center>
+            <div class="content-container">
+                <video height="80%" controls class="player">
+                    <!-- make it play right video -->
+                    <source src="/static/working_videos/{{ result[0] }}.mp4" type="video/mp4" />
+                </video>
+                <h2>{{ result[2] }}</h2>
+                <p>
+                    by: 
+                    {% for username in result[1] %}
+                    <span>{{ username }}, </span>
+                    {% endfor %}
+                </p>
+            </div>
+        </center>
     {% endfor %}
+
+    
+
+    
 
     <script>
         document.getElementById("video-input").addEventListener("change", () => {
             document.getElementById("start-post-form").submit()
-            document.getElementById('loading').style = ""
         }, false)
     </script>
 
