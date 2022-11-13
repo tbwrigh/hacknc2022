@@ -1,5 +1,5 @@
 # The Story Goes
-## By Tyler Wright, Megan Kulshekar, Katie Duncan
+## By Tyler Wright, Megan Kulshekar, ~~Katie Duncan~~
 ## Built for HackNC 2022
 
 
