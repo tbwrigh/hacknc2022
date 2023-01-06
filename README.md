@@ -1,6 +1,10 @@
 # The Story Goes
-## By Tyler Wright, Megan Kulshekar, ~~Katie Duncan~~
-## Built for HackNC 2022
+
+
+## Originally Built for HackNC 2022
+### Original Contributors: Tyler Wright, Megan Kulshekar, Katie Duncan
+
+### Now Maintained By: Tyler Wright & Megan Kulshekar 
 
 
 ### Overview
